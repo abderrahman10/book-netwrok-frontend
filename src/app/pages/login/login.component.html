@@ -1,0 +1,46 @@
+
+
+
+<div class="fixed left-0 top-0 min-h-screen min-w-screen login-container">
+
+<div class="px-5 min-h-screen flex justify-content-center align-items-center ">
+  <div class="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
+      <div class="mb-4">
+          <div class="text-900 text-xl font-bold mb-2">Log in</div>
+          <span class="text-600 font-medium">Please enter your details</span>
+      </div>
+     
+
+      <div *ngIf="errorMsg.length">
+        <p *ngFor="let msg of errorMsg">{{ msg }}</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="flex flex-column">
+              <span class="p-input-icon-left w-full mb-4">
+                  <i class="pi pi-envelope"></i>
+                  <input id="email" type="text" pInputText class="w-full md:w-25rem" formControlName="email"  placeholder="Email">
+
+              </span>
+              <span class="p-input-icon-left w-full mb-2">
+                <i class="pi pi-lock z-2"></i>
+                  <!-- <input id="password" type="password" pInputText class="w-full md:w-25rem" formControlName="password"  placeholder="Password"> -->
+                  <p-password id="password" placeholder="Password" styleClass="w-full" formControlName="password"  [inputStyle]="{paddingLeft: '2.5rem'}" inputStyleClass="w-full md:w-25rem" [feedback]="false"  ></p-password>
+             
+                </span>
+          
+              <div class="mb-4 flex flex-wrap mt-4 gap-3">
+                  <div>
+                      <p-checkbox name="checkbox" value="val" styleClass="mr-2" [binary]="true"></p-checkbox>
+                      <label for="checkbox" class="text-900 font-medium mr-8">Remember Me</label>
+                                        </div>
+                  <a class="text-600 cursor-pointer hover:text-primary cursor-pointer ml-auto transition-colors transition-duration-300">Reset password</a>
+              </div>
+
+              <button pButton pRipple label="Log In" class="w-full mb-4"  ></button>
+              <span class="font-medium text-600">Create an account? <a class="font-semibold cursor-pointer text-900 hover:text-primary transition-colors transition-duration-300"  (click)="register()">Register</a></span>
+        </div>
+    </form>
+  </div>
+</div>
+</div>
