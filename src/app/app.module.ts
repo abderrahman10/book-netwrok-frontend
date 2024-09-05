@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,8 +23,29 @@ import { MenuComponent } from './shared/menu/menu.component';
 import { MenubarModule } from 'primeng/menubar';
 import { AvatarModule } from "primeng/avatar";
 import { BookListComponent } from './pages/book-list/book-list.component'; 
-import { httpTokenInterceptor } from './interceptor/http-token.interceptor';
+import { HttpTokenInterceptor } from './interceptor/http-token.interceptor';
+import { CardModule } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
+import { RatingStarsComponent } from './pages/book-list/rating-stars/rating-stars.component';
+import { RatingModule } from 'primeng/rating';
+import { PaginatorModule } from 'primeng/paginator';
+import { MyBooksComponent } from './pages/my-books/my-books.component';
+import { DialogModule } from 'primeng/dialog';
+import { AddBookComponent } from './pages/add-book/add-book.component';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { BorrowedBooksListComponent } from './pages/borrowed-books-list/borrowed-books-list.component';
+import { TableModule } from 'primeng/table';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessageModule } from 'primeng/message';
+import { MyReturnedBooksComponent } from './pages/my-returned-books/my-returned-books.component';
+import { KeycloakService } from './services/keycloak.service';
 
+export function keycloakFactory(keycloakFactory:KeycloakService){
+  return ( )=>{keycloakFactory.init();
+
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +54,11 @@ import { httpTokenInterceptor } from './interceptor/http-token.interceptor';
     ActivateAccountComponent,
     MenuComponent,
     BookListComponent,
+    RatingStarsComponent,
+    MyBooksComponent,
+    AddBookComponent,
+    BorrowedBooksListComponent,
+    MyReturnedBooksComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,10 +76,33 @@ import { httpTokenInterceptor } from './interceptor/http-token.interceptor';
     InputOtpModule,
     ToastModule,
     MenubarModule,
-    AvatarModule
+    AvatarModule,
+    CardModule,
+    TagModule,
+    RatingModule,
+    PaginatorModule,
+    DialogModule,
+    ConfirmPopupModule,
+    TableModule,
+    MessageModule,
+    InputTextareaModule
+    
    
   ],
-  providers: [provideHttpClient(withInterceptors([httpTokenInterceptor])),MessageService],
+  providers: [
+    HttpClient,
+    provideHttpClient(withInterceptors([HttpTokenInterceptor])),
+    MessageService,
+    ConfirmationService,
+    {
+      provide: APP_INITIALIZER,
+      deps:[KeycloakService],
+      useFactory: keycloakFactory,
+      multi:true
+    }
+
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

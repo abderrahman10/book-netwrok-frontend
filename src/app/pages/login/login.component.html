@@ -1,4 +1,4 @@
-
+<!-- 
 
 
 <div class="fixed left-0 top-0 min-h-screen min-w-screen login-container">
@@ -11,9 +11,8 @@
       </div>
      
 
-      <div *ngIf="errorMsg.length">
-        <p *ngFor="let msg of errorMsg">{{ msg }}</p>
-      </div>
+      <p-messages></p-messages>
+
 
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="flex flex-column">
@@ -24,7 +23,6 @@
               </span>
               <span class="p-input-icon-left w-full mb-2">
                 <i class="pi pi-lock z-2"></i>
-                  <!-- <input id="password" type="password" pInputText class="w-full md:w-25rem" formControlName="password"  placeholder="Password"> -->
                   <p-password id="password" placeholder="Password" styleClass="w-full" formControlName="password"  [inputStyle]="{paddingLeft: '2.5rem'}" inputStyleClass="w-full md:w-25rem" [feedback]="false"  ></p-password>
              
                 </span>
@@ -43,4 +41,4 @@
     </form>
   </div>
 </div>
-</div>
+</div> -->

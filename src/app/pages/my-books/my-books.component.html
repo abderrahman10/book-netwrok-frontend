@@ -1,0 +1,56 @@
+
+  <div class="card flex justify-content-left" style="margin:15px;">
+    <p-button label="Add Book" icon="pi pi-check" (onClick)="showDialog()" />
+  </div>
+  
+  <p-toast />
+  <p-confirmPopup />
+  <div class="grid -mt-3 -ml-3 -mr-3">
+
+    <div class="col-12 md:col-6 lg:col-4" *ngFor="let book of booksOwnerResponse.content">
+    <div class="card"   [ngClass]="{ 'border-red': book.archived,'border-green': book.shareable}">
+     
+      
+
+      <div class="p-2">
+        <div class="shadow-2 p-4 surface-card border-round">
+          <div class="relative mb-3">
+            <img [src]="getBookCover(book)" class="w-full" />
+          </div>
+          <div class="flex justify-content-between align-items-center mb-3">
+            <span class="text-900 font-medium text-xl">{{ book.title }}</span>
+            <span>
+              <app-rating-stars [rating]="book.rate || 0"></app-rating-stars>
+              <span class="font-medium">{{ book.rate }}</span>
+            </span>
+          </div>
+          <div class="flex justify-content-between align-items-center mb-3">
+            <span class="text-900 font-medium text-xl">{{ book.isbn }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center mb-3">
+            <span class="text-900 font-medium text-xl">{{ book.owner }}</span>
+            <span class="text-900 font-medium text-xl"> shareable: {{ book.shareable }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center mb-3">
+            <span class="text-900 font-medium text-xl"> {{ book.isbn }}</span>
+            <span class="text-900 font-medium text-xl"> Archived: {{ book.archived }}</span>
+          </div>
+      
+
+          <div class="flex flex-wrap gap-2 " *ngIf="isManaged">
+            <button pButton pRipple type="button" icon="pi pi-pen-to-square"
+              class="p-button-rounded p-button-info p-button-outlined" (click)="onEdit(book)"></button>
+            <button pButton pRipple type="button" icon="pi pi-share-alt"
+              class="p-button-rounded p-button-warning p-button-outlined" (click)="onShare(book)"></button>
+            <button pButton pRipple type="button" icon="pi-eraser"
+              class="p-button-rounded p-button-help p-button-outlined" (click)="onArchive(book)"></button>
+
+              <button pButton pRipple type="button" icon="pi pi-trash"
+              class="p-button-rounded p-button-info p-button-outlined" (click)="onDelete($event,book)"></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

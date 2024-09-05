@@ -1,0 +1,12 @@
+<div class="rating">
+    <ng-container *ngFor="let star of fullStars">
+      <i class="pi pi-star-fill"></i>
+    </ng-container>
+    <ng-container *ngIf="hasHalfStar">
+      <i class="pi pi-star-half-fill"></i>
+    </ng-container>
+    <ng-container *ngFor="let star of emptyStars">
+      <i class="pi pi-star"></i>
+    </ng-container>
+  </div>
+  
